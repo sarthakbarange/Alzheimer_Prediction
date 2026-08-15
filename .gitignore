@@ -24,11 +24,10 @@ wheels/
 *.egg
 
 # Model files (too large for GitHub)
-Backend/*.pth
-Backend/*.pt
-Backend/*.pkl
-Backend/*.h5
-Backend/*.pb
+Backend/model_scripted.pt
+Backend/best_model.pth
+*.pth
+*.pt
 
 # IDE
 .vscode/
