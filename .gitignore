@@ -23,11 +23,7 @@ wheels/
 .installed.cfg
 *.egg
 
-# Model files (too large for GitHub)
-Backend/model_scripted.pt
-Backend/best_model.pth
-*.pth
-*.pt
+# Model files tracked with Git LFS
 
 # IDE
 .vscode/

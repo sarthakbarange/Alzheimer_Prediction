@@ -1,0 +1,2 @@
+Backend/*.pt filter=lfs diff=lfs merge=lfs -text
+Backend/*.pth filter=lfs diff=lfs merge=lfs -text
