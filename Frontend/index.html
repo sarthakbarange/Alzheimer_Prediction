@@ -1,0 +1,197 @@
+git init<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alzheimer's Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'medical-blue': '#1e3a8a',
+                        'clinical-blue': '#3b82f6',
+                        'calm-blue': '#60a5fa',
+                        'light-blue': '#dbeafe',
+                        'soft-blue': '#f0f9ff'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-screen bg-gradient-to-br from-light-blue via-white to-soft-blue">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 z-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%231e3a8a&quot; fill-opacity=&quot;0.4&quot;%3E%3Ccircle cx=&quot;7&quot; cy=&quot;7&quot; r=&quot;7&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-md shadow-sm border-b border-clinical-blue/10 flex-shrink-0">
+            <div class="w-full px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gradient-to-br from-clinical-blue to-calm-blue rounded-lg mr-3 flex items-center justify-center">
+                            <i class="fas fa-brain text-white text-lg"></i>
+                        </div>
+                        <h1 class="text-xl font-bold text-medical-blue">NeuroDetect</h1>
+                    </div>
+                    <button class="bg-gradient-to-r from-clinical-blue to-calm-blue hover:from-clinical-blue/90 hover:to-calm-blue/90 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg">
+                        Upload MRI Scan
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 overflow-auto">
+            <!-- Hero Section -->
+            <div id="uploadPage" class="w-full px-4 sm:px-6 lg:px-8 py-6">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-clinical-blue/20 to-calm-blue/20 rounded-full mb-6">
+                        <i class="fas fa-microscope text-3xl text-clinical-blue"></i>
+                    </div>
+                    <h2 class="text-5xl font-bold text-medical-blue mb-6">
+                      Early Alzheimer Prediction with AI
+                    </h2>
+                    <p class="text-xl text-gray-600 w-full leading-relaxed">
+                        Advanced neurological analysis combining scientific precision with compassionate care. 
+                        Our system provides clear insights for better understanding and early intervention.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-start mb-8">
+                    <!-- Left Side - Upload Card -->
+                    <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-clinical-blue/10">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-clinical-blue to-calm-blue rounded-lg mr-4 flex items-center justify-center">
+                                <i class="fas fa-file-medical text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-semibold text-medical-blue">Upload MRI Scan</h3>
+                                <p class="text-gray-600">Begin your analysis journey</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-700 mb-6 leading-relaxed">
+                                Your MRI scan holds important information. Our advanced analysis system examines 
+                                neurological patterns with clinical precision and scientific rigor.
+                            </p>
+                            
+                            <!-- Upload Area -->
+                            <div id="dropZone" class="border-2 border-dashed border-clinical-blue/30 rounded-xl p-8 text-center hover:border-clinical-blue/50 hover:bg-light-blue/20 transition-all duration-300 cursor-pointer bg-gradient-to-br from-light-blue/30 to-soft-blue/30">
+                                <div id="uploadContent">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-clinical-blue/20 to-calm-blue/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <i class="fas fa-cloud-upload-alt text-3xl text-clinical-blue"></i>
+                                    </div>
+                                    <p class="text-gray-700 font-medium mb-2">Drop your MRI image here</p>
+                                    <p class="text-sm text-gray-500 mb-4">or</p>
+                                    <label for="imageUpload" class="bg-gradient-to-r from-clinical-blue to-calm-blue hover:from-clinical-blue/90 hover:to-calm-blue/90 text-white px-6 py-3 rounded-lg cursor-pointer transition-all duration-300 inline-block shadow-lg">
+                                        Choose File
+                                    </label>
+                                    <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                                    <p class="text-xs text-gray-500 mt-4"> JPG, PNG up to 20 MB</p>
+                                </div>
+                                
+                                <div id="previewContainer" class="hidden">
+                                    <img id="preview" class="mx-auto max-h-48 object-contain rounded-lg mb-4 shadow-lg">
+                                    <p id="fileName" class="text-sm text-gray-600 mb-4 font-medium"></p>
+                                    <button id="removeImage" class="text-clinical-blue hover:text-calm-blue text-sm font-medium transition-colors">
+                                        <span class="mr-1">×</span> Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="analyzeBtn" class="w-full bg-gradient-to-r from-clinical-blue to-calm-blue hover:from-clinical-blue/90 hover:to-calm-blue/90 text-white py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                            Begin Analysis
+                        </button>
+                        
+                        <div id="progressContainer" class="hidden mt-6">
+                            <div class="bg-gradient-to-r from-light-blue to-soft-blue rounded-xl p-4 border border-clinical-blue/20">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-medium text-medical-blue">Processing scan...</span>
+                                    <span id="progressText" class="text-sm font-medium text-clinical-blue">0%</span>
+                                </div>
+                                <div class="w-full bg-white/50 rounded-full h-3">
+                                    <div id="progressBar" class="bg-gradient-to-r from-clinical-blue to-calm-blue h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side - Feature Cards -->
+                    <div class="space-y-6">
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-clinical-blue/10">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gradient-to-br from-clinical-blue to-calm-blue rounded-lg mr-4 flex items-center justify-center">
+                                    <i class="fas fa-dna text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-medical-blue mb-2">Scientific Precision</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Advanced algorithms developed through extensive research provide accurate, reliable analysis you can trust.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-clinical-blue/10">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gradient-to-br from-clinical-blue to-calm-blue rounded-lg mr-4 flex items-center justify-center">
+                                    <i class="fas fa-project-diagram text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-medical-blue mb-2">Explainable AI</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Grad-CAM visualization highlights important brain regions, making the AI predictions transparent and easy to understand. 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border border-clinical-blue/10">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gradient-to-br from-clinical-blue to-calm-blue rounded-lg mr-4 flex items-center justify-center">
+                                    <i class="fas fa-eye text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-medical-blue mb-2">Clear Insights</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Visual attention maps and detailed explanations help you understand the analysis with clarity and confidence.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsPage" class="hidden w-full px-4 sm:px-6 lg:px-8 py-6">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-clinical-blue/20 to-calm-blue/20 rounded-full mb-6">
+                        <i class="fas fa-clipboard-check text-2xl text-clinical-blue"></i>
+                    </div>
+                    <h2 class="text-4xl font-bold text-medical-blue mb-4">Analysis Results</h2>
+                    <p class="text-lg text-gray-600">
+                        Clear insights for informed decisions
+                    </p>
+                </div>
+
+                <div id="resultContent" class="w-full space-y-8 pb-8">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
