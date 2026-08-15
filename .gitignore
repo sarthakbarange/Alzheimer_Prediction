@@ -4,8 +4,13 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual Environments
+.venv/
 venv/
+env/
 ENV/
 build/
 develop-eggs/
@@ -23,7 +28,13 @@ wheels/
 .installed.cfg
 *.egg
 
-# Model files tracked with Git LFS
+# Flask
+logs/
+*.log
+
+# Environment Files
+.env
+.env.*
 
 # IDE
 .vscode/
@@ -32,6 +43,18 @@ wheels/
 *.swo
 *~
 
+# React/Vite
+node_modules/
+dist/
+.vite/
+
+# Jupyter
+.ipynb_checkpoints/
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
